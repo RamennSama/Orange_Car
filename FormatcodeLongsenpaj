@@ -1,0 +1,61 @@
+#include <bits/stdc++.h>
+using namespace std;
+ 
+typedef long long ll;
+typedef double db;
+typedef pair<int, int> ii;
+typedef pair<ll, int> lli;
+typedef unsigned long long ull;
+typedef vector<int> vi;
+typedef vector<vector<int>> vii;
+typedef vector<vector<ii>> vpi;
+#define fi first
+#define se second
+#define pb push_back
+#define ed cout << "\n"
+#define no cout << "NO\n"
+#define ye cout << "YES\n"
+#define FOR(i, l, r) for (int i = l; i <= r; i++)
+#define FOD(i, r, l) for (int i = r; i >= l; i--)
+#define FOB(i, l, r) for (int i = l; i < r; i++)
+#define mem(a, b) memset(a, b, sizeof(a))
+#define all(a) a.begin(), a.end()
+#define sz(A) (int)A.size()
+#define faster() ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL)
+template <typename T, typename U> inline bool chmax(T &a, U b) { return a < b ? (a = b, true) : false; }
+template <typename T, typename U> inline bool chmin(T &a, U b) { return a > b ? (a = b, true) : false; }
+const int N = 5e5 + 15;
+const int MOD = 1e9 + 7;
+
+//ll gcd(ll a, ll b){
+//	return b ? gcd(b, a % b) : a;
+//}
+
+//ll lcm(ll a, ll b){
+//	return a / __gcd(a, b) * b; 
+//} 
+//
+//ll count(ll n, ll cur){
+//    if(n % cur != 0) return 0;
+//	ll N = n / cur; ll ans = 0; 
+//	for(ll i = 1; i * i <= N; i++){
+//		if(N % i == 0){
+//			 ans++;
+//			if(i != N / i) ans++; 
+//		} 
+//	} 
+//	return ans; 
+//} 
+
+void solve() {
+
+}
+
+int main() {
+    faster();
+    int t; t = 1; 
+    cin >> t;
+    while(t--) 
+        solve();
+    return 0;
+}
