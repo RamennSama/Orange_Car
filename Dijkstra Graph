@@ -36,50 +36,50 @@ typedef vector<vector<ii>> vpi;
 #define faster() ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL)
 template <typename T, typename U> inline bool chmax(T &a, U b) { return a < b ? (a = b, true) : false; }
 template <typename T, typename U> inline bool chmin(T &a, U b) { return a > b ? (a = b, true) : false; }
-const int N = 5e5 + 15;
+const int N = 1e5 + 15;
 const int MOD = 1e9 + 7;
 int n, m, s, t;
-vector<pair<int, int>>adj[1001];
-bool vis[1001] = {};
-int parent[1001] = {};
+vector<pair<int, int>>adj[N];
+bool vis[N] = {};
+int parent[N] = {};
 //queue<tuple<int, int, int, int>> q;
 
 void Dijkstra(){
-	priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>>Q;
-	vector<int>step(n + 1, 1e9);
-	step[s] = 0;
-	Q.push({s, 0}); parent[s] = s;
+	priority_queue<pair<ll, int>, vector<pair<ll, int>>, greater<pair<ll, int>>>Q;
+	vector<ll>step(n + 1, 1e18 + 1);
+	step[s] = 0; parent[s] = s;
+	Q.push({0, s});
 	while(!Q.empty()){
 		auto it = Q.top(); Q.pop();
-		int u = it.fi;
+		int u = it.se;
 		if(vis[u]) continue;
 		vis[u] = 1;
 		for(auto it : adj[u]){
-			int v = it.fi; int w = it.se;
+			int v = it.se; int w = it.fi;
 			if(step[v] > step[u] + w){
 				step[v] = step[u] + w;
-				Q.push({v, step[v]});
+				Q.push({step[v], v});
 				parent[v] = u;
 				}
 			}
 		}
-	cout << step[t] << endl;
-	vector<int>path;
-	while(1){
-		path.pb(t);
-		if(t == s) break;
-		t = parent[t];
-	}
-	reverse(all(path));
-	FOB(i, 0, path.size()) cout << path[i] << ' ';
+//	cout << step[t] << endl;
+//	vector<int>path;
+//	while(1){
+//		path.pb(t);
+//		if(t == s) break;
+//		t = parent[t];
+//	}
+//	reverse(all(path));
+	FOR(i, 1, n) cout << step[i] << ' ';
 }
-
 void solve(){
-	cin >> n >> m >> s >> t;
+	cin >> n >> m;
+	s = 1, t = n;
 	FOB(i, 0, m){
 		int x, y, w;
 		cin >> x >> y >> w;
-		adj[x].pb({y, w});
+		adj[x].pb({w, y});
 	}
 	Dijkstra();
 }
@@ -87,7 +87,7 @@ void solve(){
 
 int main(){
     faster();
-      freopen("input.INP", "r", stdin);
+       freopen("input.INP", "r", stdin);
      //freopen("output.OUT", "w", stdout);
     int t; t = 1; 
     //cin >> t;
