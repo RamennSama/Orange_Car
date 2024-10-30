@@ -67,9 +67,11 @@ void Dijkstra(){
 		for(int k = 0; k < 4; k++){
 			int imoi = u1 + dx[k];
 			int jmoi = u2 + dy[k];
+                        if(!check(imoi, jmoi){
 			if(step[imoi][jmoi] > step[u1][u2] + a[imoi][jmoi]){
 				step[imoi][jmoi] = step[u1][u2] + a[imoi][jmoi];
 				Q.push({step[imoi][jmoi],{imoi, jmoi}});
+                                }
 			}
 		}
 	}
