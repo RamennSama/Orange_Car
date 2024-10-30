@@ -71,7 +71,6 @@ void Dijkstra(){
 //		t = parent[t];
 //	}
 //	reverse(all(path));
-	FOR(i, 1, n) cout << step[i] << ' ';
 }
 void solve(){
 	cin >> n >> m;
