@@ -45,6 +45,9 @@ int sz[1001] = {};
 int n, m;
 struct edge{
 	int x, y, w;
+	bool operator < (edge const& a){
+		return w < a.w;
+		}
 };
 
 struct cmp{
@@ -82,7 +85,8 @@ void Kruskal(){
 //	sort(all(E), [](edge a, edge b){
 //		return a.w < b.w;
 //	});
-    sort(all(E), cmp()); int ans = 0;
+//    sort(all(E), cmp());
+    sort(all(E)); int ans = 0;
     vector<edge>MST;
     FOB(i, 0, m){
     	if(MST.size() == n - 1) break;
