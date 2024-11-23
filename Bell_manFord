@@ -57,9 +57,21 @@ void Bell_manFord(int st){
 			if(step[u] < INF) step[v] = min(step[v], step[u] + w);
 		}
 	}
-	FOR(i, 1, n) cout << step[i] << ' ';
-	ed;
+	bool checkneg = 0;
+	for(auto it : E){
+		int u = it.x, v = it.y, w = it.w;
+		if(step[u] < INF && step[v] > step[u] + w){
+			checkneg = 1; break;
+		}
+	}
+	if(checkneg) cout << "Cycle Negavite\n"; // la nguyen cai vong do, tat ca cac canh deu co trong so am
+	else{
+		cout << "No Cyclee Negavite, Yataaa!!!\n";
+		FOR(i, 1, n) cout << step[i] << ' ';
+		ed;
+	}
 }
+
 void solve(){
 	cin >> n >> m;
 	FOB(i, 0, m){
