@@ -85,7 +85,8 @@ void solve(){
 	fill(step + 1, step + n + 1, INF);
 	Bell_manFord(1);
 }
-
+Chu trình âm (negative cycle) là một khái niệm trong lý thuyết đồ thị. 
+Nó đề cập đến một chu trình (cycle) trong đồ thị mà tổng trọng số các cạnh trong chu trình đó có giá trị âm.
 
 int main(){
     faster();
