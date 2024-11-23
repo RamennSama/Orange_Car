@@ -71,7 +71,7 @@ void Bell_manFord(int st){
 		ed;
 	}
 }
-
+// neu co nhieu TPLT, thi check tat ca
 void solve(){
 	cin >> n >> m;
 	FOB(i, 0, m){
