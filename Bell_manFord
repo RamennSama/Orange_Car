@@ -51,7 +51,7 @@ int step[N];
 
 void Bell_manFord(int st){
 	step[st] = 0;
-	FOR(i, 1, n - 2){ // lap n - 1, hoac n - 2 lan
+	FOR(i, 1, n - 2){ // lap n - 1
 		for(auto it : E){
 			int u = it.x, v = it.y, w = it.w;
 			if(step[u] < INF) step[v] = min(step[v], step[u] + w);
