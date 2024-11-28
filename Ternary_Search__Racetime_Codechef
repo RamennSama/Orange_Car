@@ -1,0 +1,91 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+
+typedef long long ll;
+typedef double db;
+typedef pair<int, int> ii;
+typedef pair<ll, int> lli;
+typedef unsigned long long ull;
+typedef unsigned long long int ulli;
+typedef vector<int> vi;
+typedef vector<vector<int>> vii;
+typedef vector<vector<ii>> vpi;
+#define fi first
+#define se second
+#define pb push_back
+#define ed cout << "\n"
+#define no cout << "NO\n"
+#define ye cout << "YES\n"
+#define FOR(i, l, r) for (int i = l; i <= r; i++)
+#define FOD(i, r, l) for (int i = r; i >= l; i--)
+#define FOB(i, l, r) for (int i = l; i < r; i++)
+#define mem(a, b) memset(a, b, sizeof(a))
+#define all(a) a.begin(), a.end()
+#define sz(A) (int)A.size()
+#define faster() ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL)
+template <typename T, typename U> inline bool chmax(T &a, U b) { return a < b ? (a = b, true) : false; }
+template <typename T, typename U> inline bool chmin(T &a, U b) { return a > b ? (a = b, true) : false; }
+const int N = 2e5 + 15;
+const int MOD = 1e9 + 7;
+const ll INF = -1e18;
+const double epsilon = 1e-9; // 1e ^ -9// sai so 0.000000001
+
+int a[N], b[N];
+int n, k;
+//int TernarySearch(int a[], int n, int target){
+//	int l = 0, r = n - 1;
+//	while(l <= r){
+//		int mid1 = l + (r - l) / 3;
+//		int mid2 = r - (r - l) / 3;
+//		if(a[mid1] == target) return mid1;
+//		if(a[mid2] == target) return mid2;
+//		if(target < a[mid1]) r = mid1 - 1;
+//		else if(target > a[mid2]) l = mid2 + 1;
+//		else {
+//			l = mid1 + 1;
+//			r = mid2 - 1;
+//		}
+//	}
+//	return -1;
+//}
+
+double f(double x){
+	double mi = 1e18 + 1, mx = 0;
+	FOR(i, 1, n){
+		mi = min(mi, x * a[i] + b[i]);
+		mx = max(mx, x * a[i] + b[i]);
+	}
+	return mx - mi;
+}
+
+void find(){
+	double l = 0, r = k;
+	while(r - l > epsilon){
+		double mx1 = l + (r - l) / 3.0;
+		double mx2 = r - (r - l) / 3.0;
+		if(f(mx1) > f(mx2)) l = mx1;
+		else r = mx2;
+	}
+	cout << fixed << setprecision(6) << f(l) << endl;
+}
+// print 6 chu so => +3 => 1e-9
+// print 9 chu so => +3 => 1e-12
+void solve(){
+	cin >> n >> k;
+	FOR(i, 1, n) cin >> a[i] >> b[i];
+	find();
+}
+
+int main(){
+    faster();
+    //freopen("input.INP", "r", stdin);
+   // freopen("output.OUT", "w", stdout);
+    int t; t = 1; 
+  //  cin >> t;
+    while(t--){
+    	solve();
+    //	if(t != 0) ed;
+	}
+    return 0;
+}
