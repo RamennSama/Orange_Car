@@ -1,91 +1,85 @@
 #include <bits/stdc++.h>
 using namespace std;
- 
-// _____ ____   ___  __  __    __     ___   _ _   _    __        _____ _____ _   _ 
-//|  ___|  _ \ / _ \|  \/  |   \ \   / / | | | | | |   \ \      / /_ _|_   _| | | |
-//| |_  | |_) | | | | |\/| |    \ \ / /| |_| | | | |    \ \ /\ / / | |  | | | |_| |
-//|  _| |  _ <| |_| | |  | |     \ V / |  _  | |_| |     \ V  V /  | |  | | |  _  |
-//|_|   |_|_\_\\___/|_|__|_|      \_/  |_| |_|\___/       \_/\_/  |___| |_| |_| |_|
-// _     _____     _______ 
-//| |   / _ \ \   / / ____|
-//| |  | | | \ \ / /|  _|  
-//| |__| |_| |\ V / | |___ 
-//|_____\___/  \_/  |_____| 
-
 
 typedef long long ll;
-typedef double db;
-typedef pair<int, int> ii;
-typedef pair<ll, int> lli;
-typedef unsigned long long ull;
-typedef unsigned long long int ulli;
-typedef vector<int> vi;
-typedef vector<vector<int>> vii;
-typedef vector<vector<ii>> vpi;
+typedef pair<int,int> ii;
 #define fi first
 #define se second
 #define pb push_back
 #define ed cout << "\n"
 #define no cout << "NO\n"
 #define ye cout << "YES\n"
-#define FOR(i, l, r) for (int i = l; i <= r; i++)
-#define FOD(i, r, l) for (int i = r; i >= l; i--)
-#define FOB(i, l, r) for (int i = l; i < r; i++)
-#define mem(a, b) memset(a, b, sizeof(a))
+#define FOR(i,l,r) for (int i=l;i<=r;i++)
+#define FOD(i,r,l) for (int i=r;i>=l;i--)
+#define mem(a,b) memset(a, b, sizeof(a))
 #define all(a) a.begin(), a.end()
-#define sz(A) (int)A.size()
-#define faster() ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL)
-template <typename T, typename U> inline bool chmax(T &a, U b) { return a < b ? (a = b, true) : false; }
-template <typename T, typename U> inline bool chmin(T &a, U b) { return a > b ? (a = b, true) : false; }
+#define sz(A) (int) A.size()
+#define faster() ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
 const int N = 2e5 + 15;
-const int MOD = 1e9 + 7;
-const int INF = 1e5 + 1;
 
-vector<int>adj[N];
-int color[N];
-int n, m, ok = 1;
+unordered_map<int, vector<int>>adj;
+vector<int>color;
+int n, m;
 
-bool dfs(int u ){
-	for(int v : adj[u]){
-		if(color[v] == 0){
-			color[v] = color[u] == 1 ? 2 : 1;
-			if(!dfs(v)) return false;
-		} else if(color[v] == color[u]) return false;
-	}
-	return true;
+bool bfs(int u) {
+    queue<int>q;
+    q.push(u);
+    color[u] = 1;
+    while(!q.empty()) {
+        int u = q.front(); q.pop();
+        for(auto v : adj[u]) {
+            if(color[v] == -1) {
+                color[v] = 1 - color[u];
+                q.push(v);
+            } else {
+                if(color[v] == color[u]) return false;
+            }
+        }
+    }
+    return true;
 }
 
+bool dfs(int u, int col) {
+    color[u] = col;
+    for(auto v : adj[u]) {
+        if(color[v] == -1) {
+            if(!dfs(v, 1 - color[u])) return false;
+        } else {
+            if(color[v] == color[u]) return false;
+        }
+    }
+    return true;
+}
 
-void solve(){
-	cin >> n >> m;
-	FOB(i, 0, m){
-		int x, y;
-		cin >> x >> y;
-		adj[x].pb(y);
-		adj[y].pb(x);
-	}
-	mem(color, 0);
-	FOR(i, 1, n){
-		if(color[i] == 0){
-			color[i] = 1;
-			if(!dfs(i)){
+void __init__() {
+    cin >> n >> m;
+    for(int i = 0; i < m; i++) {
+        int x, y;
+        cin >> x >> y;
+        adj[x].pb(y);
+        adj[y].pb(x);
+    }
+    color.assign(n + 1, -1);
+}
+
+void solve() {
+    __init__();
+    for(int i = 0; i < n; i++) {
+        if(color[i] == -1) {
+            if(!bfs(i)){
 				cout << "NO\n"; exit(0);
 			}
-		}
-	}
-	FOR(i, 1, n) cout << color[i] << ' ';
-	ed;
+        }
+    }
+    // for(int i = 0; i < n; i++) cout << color[i] << ' ';
+    // ed;
+    cout << "YES\n";
 }
+// dfs và bfs tô màu khác nhau
 
-int main(){
-    faster();
-    //freopen("input.INP", "r", stdin);
-   // freopen("output.OUT", "w", stdout);
-    int t; t = 1; 
-    //cin >> t;
-    while(t--){
-    	solve();
-    	if(t != 0) ed;
-	}
+
+int main() {
+ //   SET_UP();
+    solve();
     return 0;
 }
