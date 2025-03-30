@@ -1,0 +1,90 @@
+-- Bài tập quản lý bán hàng --
+CREATE TABLE KHACHHANG(
+      MA_KH varchar(20),
+	  TEN_KH nvarchar(20),
+	  DIA_CHI nvarchar(20),
+	  DT varchar(20),
+	  EMAIL varchar(20),
+	  PRIMARY KEY(MA_KH)
+	  );
+
+CREATE TABLE HOADON(
+     MA_HD varchar(20),
+	 Ngay DATE,
+	 MA_KH varchar(20),
+	 Tong_TG INT,
+	 PRIMARY KEY(MA_HD),
+	 FOREIGN KEY(MA_KH) REFERENCES KHACHHANG(MA_KH)
+	 );
+
+CREATE TABLE VATTU(
+      MA_VT varchar(20),
+	  TEN_VT varchar(20),
+	  DON_VI_TINH nvarchar(20),
+	  GIA_MUA INT,
+	  SO_LUONG_TON INT,
+	  PRIMARY KEY(MA_VT)
+	  );
+
+CREATE TABLE CHITIETHOADON(
+      MA_HD varchar(20),
+	  MA_VT varchar(20),
+	  SL INT,
+	  KHUYEN_MAI FLOAT,
+	  GIA_BAN FLOAT,
+	  FOREIGN KEY(MA_HD) REFERENCES HOADON(MA_HD),
+	  FOREIGN KEY(MA_VT) REFERENCES VATTU(MA_VT)
+	  );
+
+
+--ALTER TABLE HOADON
+--DROP COLUMN Tong_TG;
+
+--ALTER TABLE HOADON
+--ADD MA_KH varchar(20),
+ --   Tong_TG INT ,
+	--FOREIGN KEY(MA_KH) REFERENCES KHACHHANG(MA_KH);
+
+ ALTER TABLE VATTU
+ ALTER COLUMN TEN_VT nvarchar(20);
+
+INSERT INTO KHACHHANG
+VALUES ('KH01', 'Nguyễn Thị Bé', 'Tân Bình',' 0913457895', 'bnt@yahoo.com'),
+       ('KH02', 'Lê Hoàng Nam', 'Bình Chánh', '0939878987', 'namlehoang@gmail.com'),
+	   ('KH03', 'Trần Thị Chiêu', 'Tân Bình', '0738457895', NULL),
+	   ('KH04', 'Mai Thị Quế Anh', 'Bình Chánh', NULL, NULL),
+	   ('KH05', 'Lê Văn Sáng', 'Quận 10', NULL, 'sanglv@hcm.vnn.vn'),
+	   ('KH06', 'Trần Hoàng', 'Tân Bình',' 0903457897', NULL);
+
+--TRUNCATE TABLE KHACHHANG;
+
+
+
+
+
+INSERT INTO HOADON
+VALUES ('HD001', '2010-05-12', 'KH01', NULL),
+       ('HD002', '2010-05-25', 'KH02', NULL),
+       ('HD003', '2010-05-25', 'KH01', NULL),
+       ('HD004', '2010-05-25', 'KH04', NULL),
+       ('HD005', '2010-05-26', 'KH04', NULL),
+       ('HD006', '2010-06-02', 'KH03', NULL),
+	   ('HD007', '2010-06-22', 'KH04', NULL),
+       ('HD008', '2010-06-25', 'KH03', NULL),
+       ('HD009', '2010-08-15', 'KH04', NULL),
+       ('HD010', '2010-09-30', 'KH01', NULL);
+
+INSERT INTO VATTU 
+VALUES ('VT01', 'Xi măng', 'Bao', 50000, 5000),
+       ('VT02', 'Cát', 'Khối', 45000, 50000),
+	   ('VT03', 'Gạch ống', 'Viên', 120, 800000),
+	   ('VT04',' Gạch thẻ', 'Viên', 110, 800000),
+	   ('VT05', 'Đá lớn', 'Khối', 25000, 1000),
+	   ('VT06', 'Đá nhỏ', 'Khối', 33000, 5000),
+	   ('VT07', 'Lam gió','Cái', 15000, 10000);
+
+
+
+
+--DROP TABLE CHITIETHOADON,HOADON,KHACHHANG,VATTU;
+
