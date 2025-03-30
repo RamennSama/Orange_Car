@@ -1,0 +1,193 @@
+Folder : thư mục
+File : tập tin
+
+
+cd .. : quay lại thư mục trước
+cd ../tenfolder : quay lại thư mục nhanh
+cd [ten_folder] : lên thư mục trước , "có thể ghi 1 chữ và tab"
+clear : dọn câu lệnh
+dir, ls : hiển thị các file và folder, trong thư mục hiện tại
+mkdir [ten_folder] : tạo ra 1 thư mục mới
+touch ["test.txt"] : tạo ra 1 tập tin mới, nếu chưa tồn tại
+
+echo ["Hello world"] : in, xuất nội dung
+echo > ["test.txt"] : tạo ra 1 tập tin mới
+
+> : chỉ định hưởng để xuất dữ liệu
+vd : echo "test" > [ten_file]  : overriding(Ghi đè lên tập tin.
+vd : echo "test" >> [ten_file]  : overriding(KO ghi đè lên tập tin.
+cat ["test.txt"] : hiển thị nội dung trong tập tin
+
+diff ["test.txt"], ["test.txt"] : so sánh 2 file
+git rm ["test.txt"] : xóa 1 tập tin
+
+rm -d [ten_folder] : xóa 1 thư mục ("bên trong rỗng"
+rm -r [ten_folder] : xóa 1 thư mục ("bên trong ko rỗng" và rỗng
+
+===========================================================================================
+
+reposity(repo) : kho lưu trữ
+commit : một đơn vị làm việc, đưa thông tin lên repository
+brach : nhánh
+main/master : tên của repo chính(main repo)
+merge/rebase : kết hợp 2 nhánh
+develop : tên của nhánh, lập trình viên
+
+git --help : trợ giúp, hướng dẫn
+git --version : bản của git
+git status : hiển thị trạng thái kho lưu trữ
+git log : hiển thị lịch sử các commits
+git init [repo_name] : tạo ra 1 kho lưu trữ repo local mới(Folder), và có File .git 
+git clone[repo_name] [clone_name] : tạo 1 bản sao đc liên kết với kho lưu trữ
+
+git config -l : xem cấu hình hiện tại
+git config -l [--scope] [option_name] [value] : 
+
+scope : -- system : ảnh hưởng tất cả repo
+        -- global : liên quan dến tất cả repo sau này
+        -- local : Chỉ ảnh hưởng đến 1 repo hiện tại
+git config -l --global : xem cấu hình global
+git config -l --local : xem cấu hình local
+
+- cấu hình (global) user.name: git config --global user.name "Pham Duc Long"
+- cấu hình (global) user.email : git config --global user.email "LongPD@gmail.com"
+còn trong local thì sửa câu --global là được
+
+-------------------------------------------------------------------------------------
+
+working directory -- git add -->   staging area -- git commit -->   repository()
+- HEAD thường được sử dụng để định vị commit mà bạn đang làm việc(ý nói nó đang chỉ đến các commit hiện ang làm việc)
+
+git add ["File_name"] có thể có nhiều file : thêm tệp vào Index
+git add . : thêm tất cả file vào (INDEX)
+git commit -m "Nội dung" : tạo 1 commit mới đưa vào repository
+git status : sự khác biệt giữa 3 cái cây (working directory, Index, HEAD);
+git diff : so sánh với lần commit cuối cùng(gần nhất),
+git log : xem lịch sử hoạt động commit
+git log --oneline : giống với git log nhưng hiện ít văn bản hơn
+
+--------------------------------- .gitignore ----------------------------------------
+=> ko muốn tải lên github, commit đến các file cá nhân này
+tạo file : touch .gitignore
+
+*.log : tất cả file có đuôi này (nhiều)
+Foler_name/ : bỏ qua thư mục    (một)
+File_name.txt : bỏ qua file     (một)
+vd : echo "..." > .gitignore
+-- co thể ở phiên bản mới, chỉ cần tạo .gitignore nó sẽ bỏ qua mọi Folder?
+
+------------------------------------------------------------------------------------
+central : là kho trung tâm
+local : là của dev
+
+git init --bare : tạo 1 central repository(kho trung tâm)  -- CentralRepo
+git clone[repo_name] [clone_name] : sao chép và liên kết với repo_name
+git fetch : lấy thông tin từ commit mới về central(kho trung tâm)
+git pull : lấy dữ liệu từ central(kho trung tâm) về local repo
+git push : đẩy các dữ liệu từ local đến central(kho trung tâm)
+
+CentralRepo -> git_clone -> tạo các thông tin của các git_clone
+
+git checkout [mã số của lần commit, vài số đầu]: chuyển đổi giữa các commit, quay lại trạng thái của lần commit mà mình muốn chuyển đến
+-> nếu sửa file và commit lại sẽ mất thêm lần commit nữa, nên ta sẽ lấy lần commit cũ để sửa và tải lên lại.
+=> giúp chỉnh sửa mã ...
+------------------------------------------------------------------------------------
+git branch [branch_name] : tạo nhánh
+git checkout [branch name] : chuyển nhánh
+git branch -l: xem nhánh hiện tại và các nhánh khác, nếu có dấu '*' có nghĩa là đang hoạt động nhánh đó
+- ở các Folder khác, vẫn có thể truy cập các nhánh(branch) ở Folder khác.
+
+=> sau khi commit, chỉ nhánh gốc master mới dùng được lệnh push.
+
+=> còn các nhánh mới tạo từ git branch từ nhánh hiện tại dùng lệnh : git push -u origin [branch_name]. và chỉ 1 lần
+=> sử dụng câu lệnh này khi muốn đẩy một nhánh mới lên repository
+--------------------------
+git merge [nhánh_2] : gộp 2 nhánh lại với nhau, và thường xuyên xử lý đụng độ(CONFLICT)... (sau khi xử lý đụng độ, add, commi, push lại).
+
+------------------------------------------------------------------------------------
+git merge : theo thứ tự
+git rebase : theo nhánh
+-----------------------
+git rebase [ten_nhanh] : tái cơ sở cho nhánh hiện tại
+git rebase --continue : tiếp tục rebase sau khi giải quyết xong các xung đột, hoặc thực hiện các thay đổi cần thiết trên các commit trong quá trình rebase. (':q' : thoát khỏi cửa sổ), dễ hiểu hơn có nghĩa là tiếp tục rebase sau khi sửa chữa các lỗi
+git rebase --skip : bỏ qua 1 commit trong quá trình rebase
+
+git rebase -> xử lý lỗi -> git add -> git rebase --continue
+muốn nhánh master giống nhánh hiện tại : merge 
+
+-----------------------------------------------------------------------------------
+git branch -a : liệt kê tất cả các nhánh trong kho lưu trữ(bao gồm các nhánh đã xóa và chưa git push lại)
+git branch -d [tên_nhánh] : xóa nhánh hiện tại
+=> thường sau khi merge 2 nhánh với nhau, thì có thể xóa nhánh phụ để cho gọn hơn
+- cập nhật nhánh đã xóa trên repository dùng lệnh : git push origin -d [tên_nhánh], nó sẽ xóa tên nhánh đó ra khỏi kho lưu trữ
+------------------------
+git reset [commit_id] : di chuyển HEAD về vị trí commit reset, vẫn giữ các thay đổi của file(working...), nhưng loại bỏ các stage(add .)
+=> stage(add .) của commit hiện tại sẽ chuyển qua commit đó
+
+-git reset : di chuyển về phần working directory, vd sau khi add xong nó sẽ có màu xanh, nếu dùng lệnh này và ấn status nó sẽ màu đỏ.
+=> Khu vực dàn dựng cũng được đặt lại về trạng thái của một commit được chỉ định
+
+git reset --soft [commit_id] : di chuyển HEAD về vị trí commit reset, trạng thái của stage và tất cả sự thay đổi của file được giữ nguyên
+git reset --hard [commit_id] : di chuyển con trỏ HEAD về vị trí commit reset và loại bỏ tất cả sự thay đổi của file,stage.
+vd : A1, A2, B2, A3, A4, C1 : git reset --hard[A3_ID] : di chuyển đến vị trí commit A3, sau đó file A4, C1 sẽ bị mất v.
+=> reset thay đổi
+
+=> reset và reset soft vẫn trở về được các lần commit được nhờ commit_id
+=> hard thì ko
+
+-----------------------------------------------------------------------------------------
+git revert --no-edit : ko hiện bảng xanh chỉnh sửa
+git revert [comit_id] : quay lại commit bằng cách tạo bản sao, cho nó về đuôi ( và xử lý 1 số lỗi)
+git revert --continue : tiếp tục lệnh sau khi đã sửa lỗi. error -> git add . -> git revert --continue.
+git revert --skip : bỏ qua lần commit trong quá trình revert
+
+mỗi lẫn revert [commit_id] : thì cần xóa hết các chữ trong file, vì file khi tạo bản sao cần là rỗng.
+
+=========================================================================================
+======= Clone dự án từ github về máy(sao chép tất cả folder trên github về máy) :
+- git clone [mã_repo_github] : (clone) sao chép thông tin từ repo central trên github là 1 cái thôi nhé :]]
+
+= nếu tạo 1 file rồi mà ko có repo, có thể gõ 'git init' để tạo ra 1 folder git.
+
+======= đẩy dự án lên github(ko sao chép mà chỉ kết nối để làm việc với github) :
+ => cần tạo folder có repo local
+- git remote add origin [mã_repo_github] : kết nối local repo(laptop) với central repo(github)
+- git fetch origin : dùng để cập nhật các nhánh trên github vì nó ko cập nhật sẵn
+- git remote remove origin : dùng để xóa repo central đang kết nối trên folder(hiện tại)
+
+= git branch -M [tên_nhánh] : đổi tên nhánh thành cái [tên_nhánh] vừa nhập
+
+- lần đầu push lên gihub Central : git push -u origin [ten_nhánh_hiện_tại].
+  và cần phải tạo repo mới trên github mới có mã repo
+
+==>
+=> git clone sao chép : hiện folder về máy
+còn git remote ... là kết nối : ko hiện folder về máy.
+==========================================================================================
+
+=== Fork : lấy central repo người khác về github mình và sửa nó.(chỉ public mới tải về github được).
+
+- git remote add newUpstream [mã_repo_github_dự_án_gốc] : dùng để xem các thay đổi từ các dự án gốc ,từ 'dự án gốc'.
+- ví dụ dự án gốc(mà chúng ta copy) sau 3 ngày bị thay đổi mới, để xem sự thay đổi của dự án đó thì sẽ dùng câu lệnh này giúp xem được sự thay đổi từ dự án kia (và phải dùng mã của dự án gốc mà chúng ta đã sao chép).
+
+- git fetch newUpstream : xem có gì mới(có thể có hiện hoặc ko, hên xui).
+
+- git remote -v :là một lệnh trong Git dùng để hiển thị tất cả các remote URL mà repository của bạn đã được cấu hình.
+= Trong Git, "remote" đề cập đến một bản sao của repository của bạn được lưu trữ trên một máy chủ từ xa, thường là trên một dịch vụ như GitHub, GitLab, hay Bitbucket.
+= Trong Git, "origin" là tên mặc định được sử dụng để đặt tên cho remote repository khi bạn clone một repository từ một nguồn khác như GitHub, GitLab, hay Bitbucket.
+
+- để update dự án đó về máy : dùng git merge newUpstream/(tên nhánh hiện tại).
+
+git clone tên repo_gốc -> ... 
+
+==========================================================================================
+FORK sau đó mới pull request
+=== Pull request cho phép những người khác trong dự án xem lại và thảo luận về các thay đổi của bạn trước khi chúng được hợp nhất (merged) vào nhánh chính
+=> nó sẽ giúp chúng ta đưa mã của mình lên repo gốc, và cần phải acp thì mới được cho lên.
+
+
+=====================================
+- git push origin --delete : xóa nhánh trên github
+- git push origin [tên_nhánh] : push nhánh lên github
+- git branch -a : Để hiển thị tất cả các nhánh sau khi bạn đã clone một repository về máy
+=> nếu là kết nối với dự án 'ko phải clone', cần git fetch, sau đó git branch -a sẽ hiện ra
